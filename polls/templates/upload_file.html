@@ -9,13 +9,29 @@
 <link href="" rel="stylesheet">
 </head>
 <body>
-    <form method="post" action="" enctype="multipart/form-data">
+    <form method="post" action="/polls/upload_file/" enctype="multipart/form-data">
     {% csrf_token %}
        <label> 上传文件 </label>
        <input type="file" name="myfile" />
        <br/>
-       <input type="submit" value="upload"/>
+       <!-- <input type="submit" id="submit" value="upload"/> -->
+       <button type="button" id="upload">提交</button>
+       <p>result</p> 
+       <p><span id='result'></span></p> 
     </form>
+
+    <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>  
+    <script>  
+        $(document).ready(function(){  
+            $("#upload").click(function(){
+                mytime = setInterval(function(){
+                    $.get("/polls/get_txt/", {}, function(ret){  
+                        $('#result').html(ret)
+                    }) 
+                }, 500)
+            });  
+        });  
+    </script> 
     
 </body>
 </html>

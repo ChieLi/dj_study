@@ -46,6 +46,13 @@ def upload_file(request):
             with open("/tmp/%s" % file.name, 'wb+') as f:
                 for chunk in file.chunks():
                     f.write(chunk)
-            return HttpResponse("upload over!")
+            return render(request, 'upload_file.html')
     else:
         return render(request, 'upload_file.html')
+
+
+def get_txt(request):
+    with open('/tmp/data.txt', 'r') as f:
+        lines = f.readlines()
+        print lines
+        return HttpResponse(lines)

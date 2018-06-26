@@ -70,10 +70,11 @@ class ResultsView(generic.DetailView):
 
 
 def upload_file(request):
+    print('hello')
     # 请求方法为POST时，进行处理
     if request.method == "POST":
         # 获取上传文件，如果没有文件，则默认为None
-        file = request.FILES.get("myfile", None)
+        file = request.FILES.get("file", None)
         if file is None:
             return HttpResponse("no files for upload!")
         else:
@@ -81,8 +82,11 @@ def upload_file(request):
             with open("/tmp/%s" % file.name, 'wb+') as f:
                 for chunk in file.chunks():
                     f.write(chunk)
-            return render(request, 'upload_file.html')
+                    print('hello')
+            # return render(request, 'upload_file.html')
+            return HttpResponse()
     else:
+        # url = request.META['HTTP_HOST']+reverse('polls:upload_file')
         return render(request, 'upload_file.html')
 
 
@@ -91,3 +95,12 @@ def get_txt(request):
         lines = f.readlines()
         print lines
         return HttpResponse(lines)
+
+
+def upload_page(request):
+    return render(request,'upload_file_tmp.html')   #这里upload_page便是上面的前端html文件
+
+
+def upload(request):
+    file = request.FILES   #一定要调用上传的文件（不管你干嘛，保存也好，啥也不干也好，反正不调用就出错了，估计是默认不调用就不接收吧。。）才能用ajax上传成功，否则报错，原因不明
+    return HttpResponse()

@@ -16,5 +16,7 @@ urlpatterns = [
     url(r'^(?P<pk>[0-9]+)/results/$', views.ResultsView.as_view(), name='results'),
     url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
     url(r'upload_file/$', views.upload_file, name='upload_file'),
-    url(r'get_txt/$', views.get_txt, name='get_txt')
+    url(r'get_txt/$', views.get_txt, name='get_txt'),
+    url(r'upload_page/$', views.upload_page),
+    url(r'upload/$', views.upload)
 ]
